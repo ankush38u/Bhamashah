@@ -48,7 +48,7 @@
     <string name="mothers_name">Mother\'s Name</string>
     <string name="nfsc_bpl_no">NFSC BPL NO.</string>
     <string name="ration_card_no">Ration Card No.</string>
-    <string name="title_activity_family_details">FamilyDetails</string>
+    <string name="title_activity_family_details">Family Details</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="spouse_name">Spouse Name</string>
     <string name="gender">Gender</string>
@@ -63,4 +63,31 @@
         <item>हिंदी</item>
     </array>
     <string name="title_activity_ecard">ECardActivity</string>
+    <string name="card_front">Front</string>
+    <string name="card_back">Back</string>
+    <string name="rajasthan_govt">Rajasthan Government</string>
+    <string name="bhamashah_ecard">Bhamashah E-card</string>
+    <string name="family_id_ecard">Family id:</string>
+    <string name="hof">Head Of Family</string>
+    <string name="account_no">Account No</string>
+    <string name="chief_officer">Chief Officer</string>
+    <string name="jaipur">Jaipur</string>
+    <string name="serial_no">S.N.</string>
+    <string name="birthdate">D.O.B</string>
+    <string name="title_activity_bhamashah_info">BhamashahInfo</string>
+    <string name="bhamashah_info_text">With the objectives of financial inclusion and to empower the women of the State, Bhamashah Scheme was launched in 2008, wherein, around 50 lakh ladies were enrolled and 29 lakh accounts were opened. Bhamashah Scheme, an end-to-end service delivery platform to transfer cash and non-cash benefits to the targeted beneficiaries in a transparent manner, was relaunched in the year 2014 with broader objectives. The Scheme is a family-based programme of financial inclusion, where each family is issued a ‘Bhamashah Card’. The Card is linked to a bank account that is in the name of lady of the house who is the head of the family. The card leverages bio-metric identification and core banking. Multiple cash benefits would be accessed through the Bhamashah Card and will be directly transferred to bank accounts of the beneficiaries. Non-cash benefits would be given directly to entitled beneficiaries.   It is one of its kind scheme where all benefits—cash and non-cash, e.g. services of Public Distribution System (PDS), Education Scholarships, payments under MNREGA and Social Security Pensions, benefit of other Schemes like Distribution of Scooties to Students, Indira Awas Yojana, CM BPL House, Janani Surakha Yojana, Unemployment Allowance, Skill Training, other individual beneficiary schemes and many other services will be routed through Bhamashah Scheme. Under the Scheme, the family is being mapped correctly and single unique data set for the residents of the State is being made. Thus, duplication is checked. All demographics and socio-economic parameters have been included to work out entitlement under various government schemes. Therefore, the Scheme will eventually cover beneficiaries at all levels across the State. Bhamashah Scheme leverages bank accounts opened under Pradhan Mantri Jan Dhan Yojana for achieving Financial Inclusion.   The Bhamashah platform does not limit the financial inclusion to mere opening of bank accounts, but simultaneously ensures door step delivery of banking services through Business Correspondents (BCs) of the banks and Micro ATMs, being established at all the panchayats. Further, various mobile payment gateways have been integrated with the Bhamashah platform, thereby making service delivery through JAM (Jan Dhan; Aadhaar; Mobile) trinity a reality in the State.</string>
+    <string name="bahamashah_benefits_title">Benefits of the Scheme</string>
+    <string name="bhamashah_benefits">Ensuring empowerment of women Financial inclusion for all sections of the society End-to-end service delivery platform for cash and non-cash benefits with complete transparency and real-time delivery Closer-to-home banking services to citizens A unified platform for a large number of schemes Includes both family and individual beneficiary</string>
+    <string name="about_bhamashah_swasthya_yojna">Bhamashah Health Insurance</string>
+    <string name="bhamashah_health_text">It is a scheme to provide cashless facility to the IPD patients. For the identified families covered under National Food Security Act (NFSA) and Rashtriya Swasthya Bima Yojana (RSBY).  By the Government (Medical and Health Department) Through an Insurance Company “New India Assurance Company” On a fixed premium per family per year on floater basis</string>
+    <string name="bhamashah_health_benefits">To Hedge Govt. moneys To provide quality health care that avoids large out of pocket expenditure To provide financial security against illness To Improve health status of the State. To create a data base which could be used to make policy level changes in Healthcare. To bring a revolution in healthcare in rural area – by providing stimulus to Private Sector to open hospitals in rural areas and reducing the increasing burden on Government facilities</string>
+    <string name="bahamashah_health_benefits_title">Aims of the Scheme</string>
+    <string name="about_bhamashah_rojgar_srijan_yojna">Bhamashah Srijan plan</string>
+    <string name="bhamashah_rojgar_info_text">Employment for the young and unemployed Bhamashah own factory and business plan to create jobs, the Bank will provide a loan of five million rupees. Installment loans on time deposit interest at four per cent discount to the loan holder. The state government suffer interest. The scheme will be in District 500 unemployed loans.  Providing jobs to the unemployed, the government\'s official job vacancy is the other option. In this episode, the government last year to mark the end of the two years of his term unemployed has another gift. Bhamashah job creation scheme for them is.  District Collector Krishna Kunal said that under the scheme from Rs 500 million to Rs five lakh unemployed maximum loan will be. Loans for unemployed will have to apply to the District Employment Office. The five-member committee to interview Lane will be eligible for selection for unemployed loans. Then his file will be sent to the bank concerned. The Bank approved the necessary procedure to determine the interest on loans for the unemployed will be eligible.</string>
+    <string name="bahamashah_rojgar_benefits_title">These documents are required:</string>
+    <string name="bhamashah_rojgar_benefits">A copy of the registration certificate with the application form, documentation of educational qualifications, caste certificate, experience certificate, birth certificate, a copy of the project report and affidavit will be submitted to the employment office after including in duplicate. Q. prime currency bank plan approved after December 13 hereof shall be eligible for the scheme. Approved the list of cases relating to the application will be sent to the bank branch and DIC management so that they Bhamashah job creation grant scheme that could be 4 percent interest.</string>
+    <string name="title_activity_hospital">HospitalActivity</string>
+    <string name="govt_hospitals">Govt. Hospitals</string>
+    <string name="private_hospitals">Private Hospitals</string>
+    <string name="saved_in_directory">Saved in Bhamashah Directory</string>
 </resources>

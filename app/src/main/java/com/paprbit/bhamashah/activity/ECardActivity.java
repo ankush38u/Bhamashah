@@ -1,27 +1,44 @@
 package com.paprbit.bhamashah.activity;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.paprbit.bhamashah.R;
+import com.paprbit.bhamashah.fragments.FragmentECardBack;
 import com.paprbit.bhamashah.fragments.FragmentECardFront;
+import com.paprbit.bhamashah.net.model.Member;
 
-public class ECardActivity extends AppCompatActivity {
+import java.util.List;
+
+public class ECardActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback {
 
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
 
     private ViewPager mViewPager;
+
+    Member hof;
+    List<Member> memberList;
+    FragmentECardFront frontFragment;
+    FragmentECardBack backFragment;
+    String TAG = "ECardActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +51,12 @@ public class ECardActivity extends AppCompatActivity {
 
         setTitle(getString(R.string.title_activity_home));
         getSupportActionBar().setTitle(getString(R.string.title_activity_home));
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
+
+        Intent intent = getIntent();
+        memberList = (List<Member>) intent.getSerializableExtra("members");
+        hof = (Member) intent.getSerializableExtra("hof");
+
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
@@ -49,11 +70,51 @@ public class ECardActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                saveCards();
+
             }
         });
 
+    }
+
+    private void saveCards() {
+        if(isStoragePermissionGranted()){
+            if (frontFragment != null && backFragment != null) {
+                frontFragment.takeScreenshot();
+                backFragment.takeScreenshot();
+                Toast.makeText(getApplicationContext(),getString(R.string.saved_in_directory),Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    public  boolean isStoragePermissionGranted() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.v(TAG,"Permission is granted");
+                return true;
+            } else {
+
+                Log.v(TAG,"Permission is revoked");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //permission is automatically granted on sdk<23 upon installation
+            Log.v(TAG,"Permission is granted");
+            return true;
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            Log.v(TAG,"Permission: "+permissions[0]+ "was "+grantResults[0]);
+            //resume tasks needing this permission
+            saveCards();
+        }
     }
 
 
@@ -83,7 +144,18 @@ public class ECardActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return new FragmentECardFront();
+            if (frontFragment == null) {
+                frontFragment = new FragmentECardFront(hof);
+            }
+            if (backFragment == null) {
+                backFragment = new FragmentECardBack(memberList);
+                ;
+            }
+            if (position == 0) {
+                return frontFragment;
+            } else {
+                return backFragment;
+            }
         }
 
         @Override
@@ -95,9 +167,9 @@ public class ECardActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return getString(R.string.card_front);
                 case 1:
-                    return "SECTION 2";
+                    return getString(R.string.card_back);
                 case 2:
                     return "SECTION 3";
             }

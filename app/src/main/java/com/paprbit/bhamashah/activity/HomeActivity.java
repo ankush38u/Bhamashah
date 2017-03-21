@@ -257,15 +257,15 @@ public class HomeActivity extends AppCompatActivity
         } else if (id == R.id.nav_account_details) {
             ACTION = ACTION_GET_ACCOUNT;
             tvInputBoxTitle.setText(R.string.inputbox_title_account);
-        }else if(id == R.id.nav_exit){
+        } else if (id == R.id.nav_exit) {
             this.finish();
-        }else if(id == R.id.nav_bhamashah_yojna){
+        } else if (id == R.id.nav_bhamashah_yojna) {
+            startActivity(new Intent(this,BhamashahInfo.class));
+        } else if (id == R.id.nav_nearby_hospitals) {
+            startActivity(new Intent(this,HospitalActivity.class));
+        } else if (id == R.id.nav_share) {
 
-        }else if(id == R.id.nav_nearby_hospitals){
-
-        }else if(id == R.id.nav_share){
-
-        }else if(id == R.id.nav_rate){
+        } else if (id == R.id.nav_rate) {
 
         }
 
@@ -294,6 +294,7 @@ public class HomeActivity extends AppCompatActivity
             Toast.makeText(getApplicationContext(), getString(R.string.enter_valid_info), Toast.LENGTH_SHORT).show();
             return;
         }
+        pb.setVisibility(View.VISIBLE);
         if (etId.getText().length() > 7) {
             //first fetch family id from the ack id
             Call<ResponseBody> call = ServiceGenerator.getService().getBhamashahFamilyIdFromAckId(etId.getText().toString());
@@ -345,6 +346,7 @@ public class HomeActivity extends AppCompatActivity
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                pb.setVisibility(View.GONE);
                 if (response.isSuccess()) {
                     String res = null;
                     try {
@@ -388,6 +390,7 @@ public class HomeActivity extends AppCompatActivity
 
             @Override
             public void onFailure(Throwable t) {
+                pb.setVisibility(View.GONE);
                 Log.d("failure", t.getLocalizedMessage());
                 Snackbar.make(parentLayout, getString(R.string.network_error), Snackbar.LENGTH_LONG)
                         .setAction(getString(R.string.ok), null).show();
@@ -415,9 +418,43 @@ public class HomeActivity extends AppCompatActivity
             Toast.makeText(getApplicationContext(), getString(R.string.enter_valid_info), Toast.LENGTH_SHORT).show();
             return;
         }
-        Intent intent = new Intent(this, ECardActivity.class);
-        intent.putExtra("id", etId.getText().toString());
-        startActivity(intent);
+        pb.setVisibility(View.VISIBLE);
+        Call<ResponseBody> call = ServiceGenerator.getService().getBhamashahHofAndFamilyEngHindiDetailsMedium(etId.getText().toString());
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                pb.setVisibility(View.GONE);
+                if (response.isSuccess()) {
+                    String family = null;
+                    Member hof = null;
+                    try {
+                        JSONObject json = new JSONObject(response.body().string());
+                        family = json.getString("family_Details");
+                        hof = gson.fromJson(json.getString("hof_Details"), Member.class);
+                        ArrayList<Member> members = gson.fromJson(family, new TypeToken<List<Member>>() {
+                        }.getType());
+                        Intent intent = new Intent(HomeActivity.this, ECardActivity.class);
+                        intent.putExtra("members", members);
+                        intent.putExtra("hof", hof);
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        Snackbar.make(parentLayout,e.getLocalizedMessage(), Snackbar.LENGTH_LONG)
+                                .setAction(getString(R.string.ok), null).show();
+                    }
+                } else {
+                    Snackbar.make(parentLayout, getString(R.string.server_error), Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.ok), null).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                pb.setVisibility(View.GONE);
+                Snackbar.make(parentLayout, getString(R.string.network_error), Snackbar.LENGTH_LONG)
+                        .setAction(getString(R.string.ok), null).show();
+            }
+        });
+
     }
     //ecard section end
 
@@ -540,7 +577,7 @@ public class HomeActivity extends AppCompatActivity
     public void setLang(String langcode) {
         LocaleHelper.setLocale(this, langcode);
         HomeActivity.this.recreate();
-        Toast.makeText(getApplicationContext(),langcode,Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), langcode, Toast.LENGTH_SHORT).show();
 
     }
 }

@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".util.BhamashahApp"
@@ -41,6 +42,19 @@
         <activity
             android:name=".activity.ECardActivity"
             android:label="@string/title_activity_ecard"
+            android:parentActivityName=".activity.HomeActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.paprbit.bhamashah.activity.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".activity.BhamashahInfo"
+            android:label="@string/title_activity_bhamashah_info"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.HospitalActivity"
+            android:label="@string/title_activity_hospital"
             android:parentActivityName=".activity.HomeActivity"
             android:theme="@style/AppTheme">
             <meta-data
